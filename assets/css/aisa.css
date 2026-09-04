@@ -1,0 +1,697 @@
+/* ==========================================================================
+   AISA Parent Training Hub — brand stylesheet
+   Shared by every page in this repository. Add new pages by linking this
+   file; do not redefine colours or fonts locally.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Typeface — DM Sans, self-hosted
+   Served from this repository rather than a CDN so the brand font renders even
+   on school or home networks that block third-party font hosts, and so the
+   site keeps working offline. These are the official Google Fonts variable
+   files (SIL Open Font License 1.1); the wght axis covers every weight we use.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url('../fonts/dm-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url('../fonts/dm-sans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* --------------------------------------------------------------------------
+   1. Design tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand colours */
+  --aisa-purple:        #21076C;
+  --aisa-purple-deep:   #170450;
+  --aisa-gold:          #D8B664;
+  --aisa-white:         #FFFFFF;
+  --aisa-near-black:    #1A1A1A;
+  --aisa-muted-gray:    #555555;
+  --aisa-purple-tint:   #F2EFFA;
+  --aisa-purple-border: #C8BEE8;
+
+  /* Typography */
+  --aisa-font: 'DM Sans', sans-serif;
+
+  /* Spacing */
+  --aisa-spacing-sm: 0.5rem;
+  --aisa-spacing-md: 1rem;
+  --aisa-spacing-lg: 2rem;
+  --aisa-spacing-xl: 4rem;
+
+  /* Shape */
+  --aisa-radius:    8px;
+  --aisa-radius-lg: 14px;
+
+  /* Elevation */
+  --aisa-shadow:    0 1px 2px rgba(33, 7, 108, 0.06);
+  --aisa-shadow-md: 0 10px 30px rgba(33, 7, 108, 0.10);
+
+  /* Layout */
+  --aisa-container: 1120px;
+
+  color-scheme: light;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & base
+   -------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--aisa-font);
+  background: var(--aisa-white);
+  color: var(--aisa-near-black);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { max-width: 100%; }
+svg { display: block; }
+
+h1, h2, h3, h4 {
+  color: var(--aisa-purple);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+h1 { font-size: clamp(2.1rem, 5.2vw, 3.4rem); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.35rem); }
+h3 { font-size: 1.15rem; letter-spacing: -0.005em; }
+
+p  { color: var(--aisa-near-black); }
+
+a { color: var(--aisa-purple); }
+a:hover { color: var(--aisa-purple-deep); }
+
+:focus-visible {
+  outline: 3px solid var(--aisa-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Layout helpers
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--aisa-container);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.section { padding-block: clamp(3rem, 7vw, 5.5rem); }
+.section--tint { background: var(--aisa-purple-tint); }
+
+.section__head { max-width: 44rem; margin-bottom: 2.5rem; }
+.section__head p {
+  color: var(--aisa-muted-gray);
+  font-size: 1.05rem;
+  margin-top: 0.85rem;
+}
+
+/* Eyebrow labels.
+   Gold text only clears WCAG AA against the deep purple (8.2:1). On white or
+   the purple tint it lands at ~1.9:1, so on light backgrounds the label takes
+   the brand's muted gray and the gold appears as a small accent block instead
+   — which keeps the accent without making the label hard to read. */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--aisa-muted-gray);
+  margin-bottom: 0.65rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 1.4rem;
+  height: 3px;
+  flex: none;
+  border-radius: 2px;
+  background: var(--aisa-gold);
+}
+
+/* Inside cards and panels, where a gold border already carries the accent. */
+.eyebrow--plain { gap: 0; }
+.eyebrow--plain::before { display: none; }
+
+/* On the purple hero, gold text is both on-brand and high contrast. */
+.eyebrow--on-dark { color: var(--aisa-gold); gap: 0; }
+.eyebrow--on-dark::before { display: none; }
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 200;
+  background: var(--aisa-gold);
+  color: var(--aisa-purple);
+  font-weight: 700;
+  padding: 0.7rem 1.2rem;
+  border-radius: var(--aisa-radius);
+  text-decoration: none;
+}
+.skip-link:focus { top: 1rem; color: var(--aisa-purple); }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   4. Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--aisa-purple);
+  color: var(--aisa-white);
+  font-family: var(--aisa-font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--aisa-purple);
+  border-radius: var(--aisa-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+.btn:hover { background: var(--aisa-purple-deep); border-color: var(--aisa-purple-deep); color: var(--aisa-white); transform: translateY(-1px); }
+
+.btn--gold { background: var(--aisa-gold); border-color: var(--aisa-gold); color: var(--aisa-purple); }
+.btn--gold:hover { background: #c9a552; border-color: #c9a552; color: var(--aisa-purple); }
+
+.btn--outline-light { background: transparent; border-color: rgba(255, 255, 255, 0.5); color: var(--aisa-white); }
+.btn--outline-light:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--aisa-white); color: var(--aisa-white); }
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--aisa-purple-border);
+  color: var(--aisa-purple);
+  font-size: 0.83rem;
+  font-weight: 500;
+  padding: 0.45rem 0.9rem;
+}
+.btn--ghost:hover { background: var(--aisa-purple-tint); border-color: var(--aisa-purple); color: var(--aisa-purple); transform: none; }
+
+.btn__icon { width: 16px; height: 16px; flex: none; }
+
+/* --------------------------------------------------------------------------
+   5. Site header
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--aisa-purple);
+  color: var(--aisa-white);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 4.25rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  margin-right: auto;
+}
+.brand__mark {
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--aisa-gold);
+  line-height: 1;
+}
+.brand__rule { width: 1px; height: 1.6rem; background: rgba(255, 255, 255, 0.28); }
+.brand__title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--aisa-white);
+  line-height: 1.25;
+}
+
+.site-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  list-style: none;
+}
+.site-nav a {
+  display: block;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--aisa-radius);
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.site-nav a:hover { background: rgba(255, 255, 255, 0.1); color: var(--aisa-white); }
+
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--aisa-radius);
+  color: var(--aisa-white);
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.nav-toggle svg { width: 22px; height: 22px; }
+
+@media (max-width: 820px) {
+  .nav-toggle { display: block; }
+  .brand__rule, .brand__title { display: none; }
+  .site-nav {
+    display: none;
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    background: var(--aisa-purple-deep);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.5rem 1.5rem 1rem;
+  }
+  .site-nav.is-open { display: block; }
+  .site-nav ul { flex-direction: column; align-items: stretch; gap: 0; }
+  .site-nav a { padding: 0.85rem 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); border-radius: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   6. Hero
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--aisa-purple);
+  color: var(--aisa-white);
+  padding-block: clamp(3.5rem, 9vw, 6.5rem);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -14rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46rem;
+  height: 46rem;
+  border-radius: 50%;
+  border: 1px solid rgba(216, 182, 100, 0.22);
+  box-shadow:
+    inset 0 0 0 7rem rgba(216, 182, 100, 0.05),
+    inset 0 0 0 14rem rgba(216, 182, 100, 0.04);
+  pointer-events: none;
+}
+.hero__inner { position: relative; z-index: 1; max-width: 46rem; }
+.hero h1 { color: var(--aisa-white); }
+.hero__lede {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.6;
+  margin-top: 1.15rem;
+  max-width: 40rem;
+}
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2.1rem;
+}
+
+/* Stat strip sitting inside the hero */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 3.25rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  max-width: 40rem;
+}
+.stat__number {
+  font-size: clamp(2.1rem, 4.5vw, 2.9rem);
+  font-weight: 700;
+  color: var(--aisa-gold);
+  line-height: 1;
+}
+.stat__label {
+  font-size: 0.83rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 0.4rem;
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   7. Vision
+   -------------------------------------------------------------------------- */
+.vision__statement {
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--aisa-near-black);
+  max-width: 48rem;
+  letter-spacing: -0.01em;
+}
+.vision__statement em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--aisa-purple);
+}
+.vision__support {
+  color: var(--aisa-muted-gray);
+  font-size: 1.05rem;
+  max-width: 44rem;
+  margin-top: 1.35rem;
+}
+
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+.pillar {
+  background: var(--aisa-white);
+  border: 1px solid var(--aisa-purple-border);
+  border-left: 4px solid var(--aisa-gold);
+  border-radius: var(--aisa-radius);
+  padding: 1.5rem 1.35rem;
+}
+.pillar__icon { width: 26px; height: 26px; color: var(--aisa-purple); margin-bottom: 0.9rem; }
+.pillar h3 { margin-bottom: 0.45rem; }
+.pillar p { color: var(--aisa-muted-gray); font-size: 0.94rem; }
+
+/* --------------------------------------------------------------------------
+   8. Formats strip
+   -------------------------------------------------------------------------- */
+.format-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  list-style: none;
+  margin-top: 1.75rem;
+}
+.format-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--aisa-white);
+  border: 1px solid var(--aisa-purple-border);
+  border-radius: 999px;
+  padding: 0.5rem 1.05rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--aisa-purple);
+}
+.format-list svg { width: 15px; height: 15px; color: var(--aisa-gold); flex: none; }
+
+/* --------------------------------------------------------------------------
+   9. Library
+   -------------------------------------------------------------------------- */
+.library__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.search {
+  position: relative;
+  flex: 1 1 18rem;
+  max-width: 24rem;
+}
+.search svg {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px; height: 17px;
+  color: var(--aisa-muted-gray);
+  pointer-events: none;
+}
+.search input {
+  width: 100%;
+  font-family: var(--aisa-font);
+  font-size: 0.95rem;
+  color: var(--aisa-near-black);
+  background: var(--aisa-white);
+  border: 1px solid var(--aisa-purple-border);
+  border-radius: var(--aisa-radius);
+  padding: 0.7rem 0.9rem 0.7rem 2.6rem;
+}
+.search input::placeholder { color: var(--aisa-muted-gray); }
+.search input:focus { border-color: var(--aisa-purple); }
+
+.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.filter {
+  font-family: var(--aisa-font);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--aisa-purple);
+  background: var(--aisa-white);
+  border: 1px solid var(--aisa-purple-border);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.filter:hover { background: var(--aisa-purple-tint); }
+.filter[aria-pressed="true"] {
+  background: var(--aisa-purple);
+  border-color: var(--aisa-purple);
+  color: var(--aisa-white);
+  font-weight: 700;
+}
+
+.result-count { font-size: 0.85rem; color: var(--aisa-muted-gray); margin-bottom: 1.5rem; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
+  gap: 1.25rem;
+  list-style: none;
+}
+
+.collection {
+  display: flex;
+  flex-direction: column;
+  background: var(--aisa-white);
+  border: 1px solid var(--aisa-purple-border);
+  border-radius: var(--aisa-radius-lg);
+  padding: 1.5rem;
+  scroll-margin-top: 6rem;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+.collection:hover { border-color: var(--aisa-purple); box-shadow: var(--aisa-shadow-md); transform: translateY(-2px); }
+.collection:target { border-color: var(--aisa-gold); box-shadow: 0 0 0 3px rgba(216, 182, 100, 0.35); }
+.collection[hidden] { display: none; }
+
+.collection__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+.collection__icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem; height: 2.75rem;
+  flex: none;
+  border-radius: var(--aisa-radius);
+  background: var(--aisa-purple-tint);
+  color: var(--aisa-purple);
+}
+.collection__icon svg { width: 22px; height: 22px; }
+
+.badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.badge--soon { background: var(--aisa-purple-tint); color: var(--aisa-purple); border: 1px solid var(--aisa-purple-border); }
+.badge--live { background: var(--aisa-gold); color: var(--aisa-purple); }
+
+.collection h3 { margin-bottom: 0.5rem; }
+.collection__desc { color: var(--aisa-muted-gray); font-size: 0.94rem; flex: 1; }
+
+.collection__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.35rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--aisa-purple-border);
+}
+.collection__count { font-size: 0.82rem; color: var(--aisa-muted-gray); }
+
+.empty-state {
+  display: none;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  border: 1px dashed var(--aisa-purple-border);
+  border-radius: var(--aisa-radius-lg);
+  color: var(--aisa-muted-gray);
+}
+.empty-state.is-visible { display: block; }
+.empty-state strong { display: block; color: var(--aisa-purple); font-size: 1.05rem; margin-bottom: 0.35rem; }
+
+/* --------------------------------------------------------------------------
+   10. Steps
+   -------------------------------------------------------------------------- */
+.step-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.75rem;
+  counter-reset: step;
+}
+.step { counter-increment: step; }
+.step__num {
+  display: grid;
+  place-items: center;
+  width: 2.5rem; height: 2.5rem;
+  border-radius: 50%;
+  background: var(--aisa-gold);
+  color: var(--aisa-purple);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+.step__num::before { content: counter(step); }
+.step h3 { margin-bottom: 0.45rem; }
+.step p { color: var(--aisa-muted-gray); font-size: 0.94rem; }
+
+/* --------------------------------------------------------------------------
+   11. Callout panel
+   -------------------------------------------------------------------------- */
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1.25rem;
+}
+.panel {
+  background: var(--aisa-white);
+  border: 1px solid var(--aisa-purple-border);
+  border-radius: var(--aisa-radius-lg);
+  padding: 1.85rem;
+}
+.panel--highlight {
+  background: var(--aisa-purple-tint);
+  border-color: var(--aisa-purple);
+  border-left: 4px solid var(--aisa-gold);
+}
+.panel h3 { margin-bottom: 0.6rem; }
+.panel p { color: var(--aisa-muted-gray); font-size: 0.96rem; }
+.panel .btn { margin-top: 1.35rem; }
+
+/* --------------------------------------------------------------------------
+   12. Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background: var(--aisa-purple);
+  color: rgba(255, 255, 255, 0.72);
+  padding-block: 3rem 2rem;
+}
+.site-footer__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+.site-footer .brand__mark { font-size: 1.6rem; }
+.site-footer__blurb { font-size: 0.9rem; max-width: 24rem; margin-top: 0.75rem; color: rgba(255, 255, 255, 0.72); }
+.site-footer nav ul { list-style: none; display: grid; gap: 0.6rem; }
+.site-footer nav a { color: rgba(255, 255, 255, 0.82); font-size: 0.9rem; text-decoration: none; }
+.site-footer nav a:hover { color: var(--aisa-gold); text-decoration: underline; }
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  padding-top: 1.5rem;
+}
+.site-footer__bottom a { color: rgba(255, 255, 255, 0.82); }
+
+/* --------------------------------------------------------------------------
+   13. Toast (copy-link confirmation)
+   -------------------------------------------------------------------------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.75rem;
+  transform: translate(-50%, 1.5rem);
+  z-index: 300;
+  background: var(--aisa-purple);
+  color: var(--aisa-white);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.75rem 1.35rem;
+  border-radius: 999px;
+  box-shadow: var(--aisa-shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+
+/* --------------------------------------------------------------------------
+   14. Print
+   -------------------------------------------------------------------------- */
+@media print {
+  .site-header, .library__controls, .collection__foot, .hero__actions, .toast { display: none !important; }
+  .hero, .site-footer { background: var(--aisa-white) !important; color: var(--aisa-near-black) !important; }
+  .hero h1, .hero__lede { color: var(--aisa-near-black) !important; }
+  .collection { break-inside: avoid; }
+}
