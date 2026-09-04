@@ -1,0 +1,363 @@
+/* ==========================================================================
+   AISA Parent Hub — resource pages + present mode
+   Layers on top of aisa.css. Every resource page can link this to get the
+   document layout, the on/off matrix, the FAQ and the present-mode overlay.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Resource page shell
+   -------------------------------------------------------------------------- */
+.resource-hero {
+  background: var(--aisa-purple);
+  color: var(--aisa-white);
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+.resource-hero h1 { color: var(--aisa-white); max-width: 22ch; }
+.resource-hero__lede {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(1.02rem, 1.9vw, 1.2rem);
+  margin-top: 1rem;
+  max-width: 46ch;
+}
+.resource-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1.75rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+.resource-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+
+.breadcrumb {
+  font-size: 0.85rem;
+  margin-bottom: 1.1rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+.breadcrumb a { color: var(--aisa-gold); text-decoration: none; font-weight: 500; }
+.breadcrumb a:hover { text-decoration: underline; color: var(--aisa-gold); }
+
+/* Document body */
+.doc { max-width: 46rem; }
+.doc > * + * { margin-top: 1.15rem; }
+.doc h2 { margin-top: 0; }
+.doc h3 { margin-top: 2rem; }
+.doc p { font-size: 1.02rem; }
+.doc ul, .doc ol { padding-left: 1.35rem; }
+.doc li + li { margin-top: 0.5rem; }
+.doc strong { color: var(--aisa-purple); }
+
+/* --------------------------------------------------------------------------
+   2. Draft banner — removed once IT has signed the content off
+   -------------------------------------------------------------------------- */
+.draft-banner {
+  background: #4A2E00;
+  color: #FFF3D6;
+  padding: 0.9rem 0;
+  font-size: 0.9rem;
+  border-bottom: 3px solid var(--aisa-gold);
+}
+.draft-banner p { color: inherit; }
+.draft-banner strong { color: var(--aisa-gold); }
+.draft-banner code {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+.draft-banner .container { display: flex; gap: 0.75rem; align-items: flex-start; }
+.draft-banner svg { width: 20px; height: 20px; flex: none; margin-top: 2px; color: var(--aisa-gold); }
+
+/* Inline "needs confirming" marker */
+.confirm {
+  background: #FFF3D6;
+  border-bottom: 2px solid #B8860B;
+  color: #4A2E00;
+  padding: 0 0.2em;
+  border-radius: 2px;
+  font-weight: 500;
+}
+.confirm::after {
+  content: " ⚑";
+  font-size: 0.8em;
+  color: #B8860B;
+}
+
+/* --------------------------------------------------------------------------
+   3. The headline callout — the one thing to remember
+   -------------------------------------------------------------------------- */
+.headline-card {
+  background: var(--aisa-purple-tint);
+  border: 1px solid var(--aisa-purple);
+  border-left: 5px solid var(--aisa-gold);
+  border-radius: var(--aisa-radius-lg);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+.headline-card p {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--aisa-purple);
+  letter-spacing: -0.01em;
+}
+.headline-card p + p { margin-top: 0.9rem; font-size: 1rem; color: var(--aisa-muted-gray); font-weight: 400; }
+
+/* --------------------------------------------------------------------------
+   4. When-it-applies matrix
+   -------------------------------------------------------------------------- */
+.matrix { width: 100%; border-collapse: separate; border-spacing: 0.5rem; }
+.matrix caption {
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--aisa-muted-gray);
+  margin-bottom: 0.75rem;
+}
+.matrix th {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--aisa-muted-gray);
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  vertical-align: bottom;
+}
+.matrix th[scope="row"] { text-transform: none; letter-spacing: 0; font-size: 0.95rem; color: var(--aisa-purple); vertical-align: middle; }
+.matrix td {
+  border-radius: var(--aisa-radius);
+  padding: 1.1rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  vertical-align: middle;
+}
+.cell--on {
+  background: var(--aisa-purple);
+  color: var(--aisa-white);
+}
+.cell--off {
+  background: var(--aisa-white);
+  border: 1px solid var(--aisa-purple-border);
+  color: var(--aisa-muted-gray);
+}
+.cell__state {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.cell--on .cell__state { color: var(--aisa-gold); }
+.cell--off .cell__state { color: var(--aisa-purple); }
+
+/* --------------------------------------------------------------------------
+   5. Does / doesn't lists
+   -------------------------------------------------------------------------- */
+.does-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.25rem;
+}
+.does {
+  border: 1px solid var(--aisa-purple-border);
+  border-radius: var(--aisa-radius-lg);
+  padding: 1.5rem;
+  background: var(--aisa-white);
+}
+.does--yes { border-left: 4px solid var(--aisa-purple); }
+.does--no  { border-left: 4px solid var(--aisa-gold); }
+.does h3 { margin-top: 0; margin-bottom: 1rem; }
+.does ul { list-style: none; padding: 0; }
+.does li {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  font-size: 0.95rem;
+  color: var(--aisa-near-black);
+}
+.does li + li { margin-top: 0.8rem; }
+.does li svg { width: 18px; height: 18px; flex: none; margin-top: 3px; }
+.does--yes li svg { color: var(--aisa-purple); }
+.does--no  li svg { color: var(--aisa-gold); }
+
+/* --------------------------------------------------------------------------
+   6. Steps + FAQ
+   -------------------------------------------------------------------------- */
+.numbered { list-style: none; padding: 0; counter-reset: n; }
+.numbered > li {
+  counter-increment: n;
+  position: relative;
+  padding-left: 3.25rem;
+  min-height: 2.25rem;
+}
+.numbered > li + li { margin-top: 1.5rem; }
+.numbered > li::before {
+  content: counter(n);
+  position: absolute;
+  left: 0; top: 0;
+  display: grid;
+  place-items: center;
+  width: 2.25rem; height: 2.25rem;
+  border-radius: 50%;
+  background: var(--aisa-gold);
+  color: var(--aisa-purple);
+  font-weight: 700;
+}
+.numbered h3 { margin-top: 0; margin-bottom: 0.35rem; }
+.numbered p { color: var(--aisa-muted-gray); font-size: 0.95rem; }
+
+.faq { border-top: 1px solid var(--aisa-purple-border); }
+.faq details {
+  border-bottom: 1px solid var(--aisa-purple-border);
+}
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1.15rem 2.5rem 1.15rem 0;
+  font-weight: 700;
+  color: var(--aisa-purple);
+  font-size: 1.02rem;
+  position: relative;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "";
+  position: absolute;
+  right: 0.5rem; top: 50%;
+  width: 10px; height: 10px;
+  margin-top: -6px;
+  border-right: 2px solid var(--aisa-gold);
+  border-bottom: 2px solid var(--aisa-gold);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.faq details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
+.faq details > *:not(summary) { padding-bottom: 1.25rem; color: var(--aisa-muted-gray); font-size: 0.97rem; }
+.faq details > p { max-width: 46rem; }
+
+/* --------------------------------------------------------------------------
+   7. Present mode
+   In normal flow each .slide is just a section of the document. When the
+   page enters present mode one slide fills the viewport at a time.
+   -------------------------------------------------------------------------- */
+.slide { scroll-margin-top: 6rem; }
+/* Presentation furniture — a title card the document doesn't need, since the
+   page already has a hero. Shown only while presenting. */
+.slide--deck-only { display: none; }
+.slide + .slide { margin-top: clamp(3rem, 7vw, 5rem); }
+.slide__note { display: none; }
+
+body.is-presenting { overflow: hidden; }
+body.is-presenting .site-header,
+body.is-presenting .site-footer,
+body.is-presenting .resource-hero,
+body.is-presenting .draft-banner,
+body.is-presenting .no-present { display: none !important; }
+
+body.is-presenting .slide {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: none;
+  margin: 0;
+  overflow-y: auto;
+  background: var(--aisa-white);
+  padding: clamp(2rem, 6vh, 4.5rem) clamp(1.5rem, 6vw, 5rem) 6rem;
+}
+body.is-presenting .slide.is-active { display: block; }
+body.is-presenting .slide > .container { max-width: 60rem; padding-inline: 0; }
+
+/* Bigger type while presenting — readable from the back of a hall */
+body.is-presenting .slide h2 { font-size: clamp(2rem, 4.6vw, 3.2rem); }
+body.is-presenting .slide h3 { font-size: clamp(1.15rem, 1.9vw, 1.5rem); }
+body.is-presenting .slide p,
+body.is-presenting .slide li { font-size: clamp(1.05rem, 1.6vw, 1.35rem); }
+body.is-presenting .doc { max-width: none; }
+body.is-presenting .headline-card p { font-size: clamp(1.5rem, 3.4vw, 2.4rem); }
+body.is-presenting .matrix td { padding: 1.6rem 1.25rem; font-size: 1.1rem; }
+
+/* A purple slide for the title and the closing card */
+body.is-presenting .slide--feature { background: var(--aisa-purple); }
+body.is-presenting .slide--feature h2,
+body.is-presenting .slide--feature p,
+body.is-presenting .slide--feature li { color: var(--aisa-white); }
+body.is-presenting .slide--feature .eyebrow { color: var(--aisa-gold); }
+body.is-presenting .slide--feature .eyebrow::before { display: none; }
+
+/* Speaker notes surface only in present mode */
+body.is-presenting .slide__note {
+  display: block;
+  margin-top: 2.5rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--aisa-purple-border);
+  background: var(--aisa-purple-tint);
+  border-radius: var(--aisa-radius);
+  font-size: 0.95rem;
+  color: var(--aisa-muted-gray);
+  max-width: 50rem;
+}
+body.is-presenting .slide--feature .slide__note {
+  background: rgba(255, 255, 255, 0.08);
+  border-left-color: var(--aisa-gold);
+  color: rgba(255, 255, 255, 0.82);
+}
+body.is-presenting.hide-notes .slide__note { display: none; }
+
+/* Presenter control bar */
+.present-bar {
+  display: none;
+  position: fixed;
+  z-index: 500;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--aisa-purple);
+  border-radius: 999px;
+  padding: 0.4rem 0.5rem;
+  box-shadow: var(--aisa-shadow-md);
+}
+body.is-presenting .present-bar { display: flex; }
+.present-bar button {
+  display: grid;
+  place-items: center;
+  width: 2.4rem; height: 2.4rem;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--aisa-white);
+  cursor: pointer;
+}
+.present-bar button:hover:not(:disabled) { background: rgba(255, 255, 255, 0.15); }
+.present-bar button:disabled { opacity: 0.35; cursor: default; }
+.present-bar button svg { width: 18px; height: 18px; }
+.present-bar__count {
+  color: var(--aisa-white);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  padding-inline: 0.6rem;
+  min-width: 4rem;
+  text-align: center;
+}
+.present-bar__rule { width: 1px; height: 1.5rem; background: rgba(255, 255, 255, 0.25); }
+
+/* Progress bar across the top while presenting */
+.present-progress {
+  display: none;
+  position: fixed;
+  z-index: 500;
+  top: 0; left: 0;
+  height: 4px;
+  background: var(--aisa-gold);
+  transition: width 0.25s ease;
+}
+body.is-presenting .present-progress { display: block; }
+
+@media print {
+  .draft-banner, .present-bar, .present-progress, .resource-hero__actions { display: none !important; }
+  .slide { break-inside: avoid; }
+  .faq details { break-inside: avoid; }
+  .faq details > *:not(summary) { display: block !important; }
+}
