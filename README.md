@@ -123,6 +123,66 @@ Copy any existing `<li class="collection">` block in `index.html` and change:
 
 ---
 
+## Resource pages and present mode
+
+A topic card can either sit on the hub as a placeholder or link through to its
+own page. The first full one is `lightspeed-mdm/index.html`.
+
+**A resource page is also the slide deck.** Each `<section class="slide">` is a
+section of the document when reading and a full-screen slide when presenting —
+one source of truth, so the deck can never drift from the page. Press
+**Present this**, or add `#present` to the URL.
+
+| Key | Does |
+|---|---|
+| `→` `space` `PageDown` | Next slide |
+| `←` `PageUp` | Previous slide |
+| `Home` / `End` | First / last slide |
+| `F` | Fullscreen |
+| `Esc` | Exit |
+
+Swipe works for presenting from a tablet, and the browser back button exits.
+
+Useful classes (all in `assets/css/resource.css`):
+
+| Class | Use |
+|---|---|
+| `.slide` | A section of the document that is also a slide |
+| `.slide--feature` | Purple full-bleed slide — title and closing cards |
+| `.slide--deck-only` | Presentation furniture, hidden in the document |
+| `.slide__note` | Speaker notes; visible only while presenting |
+| `.confirm` | Marks a claim awaiting sign-off — highlighted with a flag |
+| `.draft-banner` | Page-top warning; delete the block when the page is approved |
+
+**Speaker notes appear on the presenter's screen**, so mirroring your display
+puts them on the projector. Hide them with the notes button in the control bar,
+or present from a laptop using extended display.
+
+### Linking a card to a page
+
+Add `data-href` to the card and make the title a link:
+
+```html
+<li class="collection" id="device-management" data-category="technology"
+    data-count="1" data-href="lightspeed-mdm/" data-keywords="...">
+  ...
+  <h3><a class="collection__link" href="lightspeed-mdm/">Your Child's Device</a></h3>
+```
+
+The whole card becomes clickable, and **Copy link** shares the resource page
+rather than the anchor.
+
+### Before publishing a page about policy
+
+Anything describing what the school can see or do on a family's device must be
+confirmed by the team that runs the system — not inferred from the vendor's
+marketing. Keep the draft banner and the `.confirm` markers in place until it is
+signed off, and record the outstanding questions next to the page (see
+`lightspeed-mdm/FACT-CHECK.md`). A reassurance that turns out to be wrong costs
+more trust than the change itself ever would.
+
+---
+
 ## Brand rules
 
 The site follows the AISA brand system. Everything is defined as CSS custom

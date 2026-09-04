@@ -73,7 +73,13 @@
 
   document.querySelectorAll('.copy-link').forEach(function (button) {
     button.addEventListener('click', function () {
-      var url = window.location.origin + window.location.pathname + '#' + button.dataset.anchor;
+      /* A card that leads to its own page shares that page; the rest share
+         their anchor on this one. */
+      var card = button.closest('.collection');
+      var href = card && card.dataset.href;
+      var url = href
+        ? new URL(href, window.location.href).href
+        : window.location.origin + window.location.pathname + '#' + button.dataset.anchor;
       copyText(url).then(
         function () { toast('Link copied — ready to share'); },
         function () { window.prompt('Copy this link:', url); }
