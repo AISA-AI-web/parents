@@ -1,7 +1,7 @@
-# AISA Parent Training Hub
+# AISA Parent Hub
 
 A permanent, shareable home for every workshop, presentation and guide the
-American International School in Abu Dhabi uses to train parents.
+American International School in Abu Dhabi shares with families.
 
 **Live site:** <https://aisa-ai-web.github.io/parents/>
 
@@ -9,7 +9,7 @@ American International School in Abu Dhabi uses to train parents.
 
 ## Why this exists
 
-Parent training content has always been generous and fragile at the same time:
+Parent-facing content has always been generous and fragile at the same time:
 decks live on laptops, handouts live in inboxes, recordings live nowhere. This
 repository is the fix. Anything we build to support families gets published
 here, in full, and stays here — so it outlives the term it was made for.

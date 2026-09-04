@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AISA Parent Training Hub — site behaviour
+   AISA Parent Hub — site behaviour
    Progressive enhancement only: with JavaScript off the page still renders,
    every collection stays visible and every anchor link still works.
    ========================================================================== */
