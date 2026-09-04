@@ -3,7 +3,7 @@
 A permanent, shareable home for every workshop, presentation and guide the
 American International School in Abu Dhabi uses to train parents.
 
-**Live site:** https://aisa-ai-web.github.io/parents/ *(once GitHub Pages is enabled — see below)*
+**Live site:** <https://aisa-ai-web.github.io/parents/>
 
 ---
 
@@ -19,8 +19,39 @@ Three rules the site is designed around:
 1. **One permanent home** — every resource, in one place, organised the way
    parents look for things.
 2. **Download, don't request** — nothing is view-only and nothing expires.
-3. **Shareable to the resource** — every collection has its own link, so you can
+3. **Shareable to the resource** — every topic has its own link, so you can
    send someone straight to the thing they need.
+
+## Write for parents, not for us
+
+**The public page speaks to parents.** This is the rule that is easiest to break
+and the most important to keep. Before you publish any wording, read it back as
+a parent:
+
+| Don't write | Write |
+|---|---|
+| "the training we run" | "guides to help you support your child" |
+| "resources we produce" | "things you can download and keep" |
+| "send a parent straight to it" | "share it with another parent" |
+| "organised by department" | "grouped by the questions families ask" |
+| "collections" | "topics" |
+
+Say *you* and *your child*. Avoid internal words — collection, deck, facilitator,
+rollout, stakeholder. Anything aimed at staff (like this file) belongs in the
+repository, not on the page.
+
+## Brand voice and content
+
+The page carries AISA's real guiding statements. If the school updates them,
+update them here too:
+
+- **Mission:** "Developing resilient learners and compassionate leaders for a
+  dynamic world." — shown in the Lion Way section.
+- **The Lion Way values:** Be Responsible, Be Safe, Be Respectful, Be Kind —
+  shown as the four value cards. They are listed by name only; if AISA publishes
+  official one-line definitions, add them rather than inventing wording.
+
+Source: [Guiding Statements](https://www.aisa.sch.ae/about/mission-vision-and-values).
 
 ---
 
@@ -32,9 +63,10 @@ Three rules the site is designed around:
 ├── assets/
 │   ├── css/aisa.css        # AISA brand stylesheet — shared by every page
 │   ├── js/site.js          # Search, filtering, copy-link, mobile nav
-│   └── fonts/              # DM Sans (self-hosted, OFL 1.1)
+│   ├── fonts/              # DM Sans (self-hosted, OFL 1.1)
+│   └── img/                # Logo slot and photography — see its README
 └── resources/              # Published files (slides, PDFs, handouts)
-    └── <collection>/       # One folder per collection
+    └── <topic>/            # One folder per topic
 ```
 
 ---
@@ -43,8 +75,8 @@ Three rules the site is designed around:
 
 ### 1. Add the file
 
-Drop the file into the folder for its collection, creating the folder if it
-doesn't exist yet:
+Drop the file into the folder for its topic, creating the folder if it doesn't
+exist yet:
 
 ```
 resources/digital-citizenship/screen-time-agreements-2026.pdf
@@ -60,7 +92,7 @@ resource is due for review:
 Publish the **original** file (`.pptx`, `.pdf`, `.docx`) so parents can keep,
 print or translate it. If a deck is large, also export a PDF alongside it.
 
-### 2. Update the collection card
+### 2. Update the topic card
 
 Open `index.html`, find the matching `<li class="collection">` block, and bump
 `data-count` to the number of published resources:
@@ -71,10 +103,11 @@ Open `index.html`, find the matching `<li class="collection">` block, and bump
     data-keywords="digital citizenship online safety screen time ...">
 ```
 
-The badge flips from *Coming soon* to *Available* and the resource count updates
-on its own — that's handled in `assets/js/site.js`.
+The badge flips from *Coming soon* to *Available*, and the count changes from
+*Nothing here yet* to the number of resources — both handled by
+`assets/js/site.js`, so there is nothing else to edit.
 
-### 3. Adding a whole new collection
+### 3. Adding a whole new topic
 
 Copy any existing `<li class="collection">` block in `index.html` and change:
 
@@ -130,11 +163,12 @@ python3 -m http.server 8000
 
 ## Publishing
 
-The site is plain static HTML, so GitHub Pages serves it as-is:
+GitHub Pages is already enabled and serves the site from `main` at the root.
+Every merge to `main` republishes automatically — there is no build step and
+nothing to configure.
 
-**Settings → Pages → Source: Deploy from a branch → `main` / `(root)`**
-
-Every push to `main` republishes. There is nothing to build.
+The relevant setting, if it ever needs checking, is
+**Settings → Pages → Source: Deploy from a branch → `main` / `(root)`**.
 
 ---
 

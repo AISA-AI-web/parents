@@ -265,6 +265,10 @@ a:hover { color: var(--aisa-purple-deep); }
   color: var(--aisa-gold);
   line-height: 1;
 }
+/* Drop-in slot for the real logo file — see assets/img/README.md. Height is
+   fixed so the header keeps its rhythm; width scales with the artwork. */
+.brand__logo { height: 2.1rem; width: auto; display: block; }
+.site-footer .brand__logo { height: 2.4rem; }
 .brand__rule { width: 1px; height: 1.6rem; background: rgba(255, 255, 255, 0.28); }
 .brand__title {
   font-size: 0.95rem;
@@ -446,6 +450,59 @@ a:hover { color: var(--aisa-purple-deep); }
   color: var(--aisa-purple);
 }
 .format-list svg { width: 15px; height: 15px; color: var(--aisa-gold); flex: none; }
+
+/* --------------------------------------------------------------------------
+   8b. Lion Way values + mission
+   -------------------------------------------------------------------------- */
+.values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+  list-style: none;
+}
+.value {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--aisa-white);
+  border: 1px solid var(--aisa-purple-border);
+  border-radius: var(--aisa-radius);
+  padding: 1.15rem 1.3rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--aisa-purple);
+  letter-spacing: -0.01em;
+}
+.value::before {
+  content: "";
+  width: 0.6rem;
+  height: 2rem;
+  flex: none;
+  border-radius: 3px;
+  background: var(--aisa-gold);
+}
+
+.mission {
+  max-width: 44rem;
+  margin-top: 3rem;
+  padding-left: 1.6rem;
+  border-left: 4px solid var(--aisa-gold);
+}
+.mission blockquote {
+  font-size: clamp(1.15rem, 2.3vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--aisa-purple);
+  letter-spacing: -0.01em;
+}
+.mission figcaption {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--aisa-muted-gray);
+  margin-top: 0.9rem;
+}
 
 /* --------------------------------------------------------------------------
    9. Library
@@ -630,6 +687,7 @@ a:hover { color: var(--aisa-purple-deep); }
 }
 .panel h3 { margin-bottom: 0.6rem; }
 .panel p { color: var(--aisa-muted-gray); font-size: 0.96rem; }
+.panel a { color: var(--aisa-purple); font-weight: 700; }
 .panel .btn { margin-top: 1.35rem; }
 
 /* --------------------------------------------------------------------------
