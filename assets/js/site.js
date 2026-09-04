@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AISA Parent Training Hub — site behaviour
+   AISA Parent Hub — site behaviour
    Progressive enhancement only: with JavaScript off the page still renders,
    every collection stays visible and every anchor link still works.
    ========================================================================== */
@@ -46,7 +46,7 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* Copy a deep link to a single collection                             */
+  /* Copy a deep link to a single topic                                  */
   /* ------------------------------------------------------------------ */
   function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) {
@@ -82,7 +82,7 @@
   });
 
   /* ------------------------------------------------------------------ */
-  /* Collection badges — driven by data-count so cards stay in sync      */
+  /* Topic badges — driven by data-count so cards stay in sync           */
   /* ------------------------------------------------------------------ */
   var collections = Array.prototype.slice.call(document.querySelectorAll('.collection'));
 
@@ -92,7 +92,11 @@
     var counter = card.querySelector('.collection__count');
 
     if (counter) {
-      counter.textContent = count === 1 ? '1 resource' : count + ' resources';
+      if (count === 0) {
+        counter.textContent = 'Nothing here yet';
+      } else {
+        counter.textContent = count === 1 ? '1 resource' : count + ' resources';
+      }
     }
     if (badge && count > 0) {
       badge.textContent = 'Available';
@@ -133,10 +137,10 @@
 
     if (resultCount) {
       if (query === '' && activeFilter === 'all') {
-        resultCount.textContent = 'Showing all ' + collections.length + ' collections.';
+        resultCount.textContent = 'Showing all ' + collections.length + ' topics.';
       } else {
         resultCount.textContent =
-          'Showing ' + visible + ' of ' + collections.length + ' collections.';
+          'Showing ' + visible + ' of ' + collections.length + ' topics.';
       }
     }
     if (emptyState) {
